@@ -1,0 +1,98 @@
+COP6726 : Database System Implementation
+
+Project2 : Implementing a Sorted File
+========
+
+
+Team Members:
+============
+
+	1) Tu Dao Yu (UFID: 9147-3473)
+	2) Yogesh Aggarwal (UFID: 1311-1361)
+
+
+BitBucket URL: https://ya87@bitbucket.org/dbi_dt_ya/dbi.git
+=============
+
+
+Code Structure:
+==============
+
+	./src : contatins source files
+	./bin : contains object files
+	./README : instructions on how to run the project
+	./Makefile : makefile to build the project
+	../gtest : googletest directory containing all googletest library files
+
+
+Build and Run:
+=============
+
+	1) googletest: Builds and runs all googletest test cases
+		a) cd to root directory of project
+		b) make googletest
+		c) cd bin
+		d) ./googltest 
+	
+	2) test: Builds and runs all test cases provided by the professor/TA
+		a) cd to root directory of project
+		b) make test
+		c) cd bin
+		d) ./test
+	
+	3) clean: deletes all the old object files
+		a) cd to root directory of project
+		b) make clean
+
+
+Example CNF's:
+=============
+
+Some example CNF's are given below. They are numbered q1,q2..q12. Use the table below to identify the tpch file associated with each CNF.
+
+     	table    |   CNF
+ ---------------------------------------
+        region    |  q1  
+        nation    |  q2 q3   
+        supplier  |  q4 q5
+        customer  |  q6
+        part      |  q7   
+        partsupp  |  q8 q9
+        orders    |  q10                
+        lineitem  |  q11 q12 
+
+q1 
+(r_name)
+
+q2 
+(n_name)
+
+q3 
+(n_regionkey)
+
+q4 
+(s_nationkey)
+
+q5
+(s_phone)
+
+q6
+(c_acctbal)
+
+q7 
+(p_size)
+
+q8 
+(ps_supplycost)
+
+q9 
+(ps_suppkey)
+
+q10 
+(o_shippriority)
+
+q11
+(l_quantity) 
+
+q12
+(l_orderkey)

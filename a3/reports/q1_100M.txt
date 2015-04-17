@@ -1,0 +1,16 @@
+ 
+** IMPORTANT: MAKE SURE THE INFORMATION BELOW IS CORRECT **
+ catalog location: 	catalog
+ tpch files dir: 	../data/
+ heap files dir: 	../dbfile/
+ 
+
+Opening heap dbfile
+ps_partkey: [6333], ps_suppkey: [334], ps_availqty: [3711], ps_supplycost: [1.01], ps_comment: [s use slyly. fluffily express requests wake carefully ironic packages]
+ps_partkey: [9097], ps_suppkey: [616], ps_availqty: [3012], ps_supplycost: [1.01], ps_comment: [s the bold pinto beans cajole carefully after the slyly unusual instructions. slyly special packages above the unusual, bold packages cajole blithely even Tiresias. theodolites among the foxes are]
+ps_partkey: [9641], ps_suppkey: [419], ps_availqty: [5091], ps_supplycost: [1.03], ps_comment: [y pending packages are alongside of the slyly final pinto beans. unusual attain]
+
+
+ query1 returned 3 records 
+
+

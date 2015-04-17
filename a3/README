@@ -1,0 +1,72 @@
+COP6726 : Database System Implementation
+
+Project3 : Relational Operators
+========
+
+
+Team Members:
+============
+
+	1) Tu Dao Yu (UFID: 9147-3473)
+	2) Yogesh Aggarwal (UFID: 1311-1361)
+
+
+BitBucket URL: https://ya87@bitbucket.org/dbi_dt_ya/dbi.git
+=============
+
+
+Code Structure:
+==============
+
+	./src : contatins source files and object files
+	./README : instructions on how to run the project
+	./src/Makefile : makefile to build the project
+
+
+Build and Run:
+=============
+	
+	1) test: Builds and runs all test cases provided by the professor/TA
+		a) cd to root directory of project
+		b) cd src
+		c) make test
+		d) ./test [1-6]
+	
+	2) clean: deletes all the old object files
+		a) cd to root directory of project
+		b) cd src
+		c) make clean
+
+
+The Queries:
+===========
+
+	1. 	select * 
+		from partsupp 
+		where ps_supplycost <1.03;
+		
+	2. 	select p_partkey, p_name, p_retailprice
+		from part 
+		where (p_retailprice > 931.01) AND (p_retailprice < 931.3);
+		
+	3. 	select sum (s_acctbal + (s_acctbal * 1.05)) 
+		from supplier;
+		
+	4. 	select sum (ps_supplycost) 
+		from supplier, partsupp 
+		where s_suppkey = ps_suppkey;
+		
+	5. 	select distinct ps_suppkey 
+		from partsupp 
+		where ps_supplycost < 100.11;
+		
+	6. 	select sum (ps_supplycost) s_nationkey 
+		from supplier, partsupp 
+		where s_suppkey = ps_suppkey groupby s_nationkey;
+
+
+Report of results:
+=================
+
+	You can see the report of results in ./reports/a3.report.xls. It shows the outputs for data set of 10M, 100M and 1G.
+	

@@ -1,0 +1,15 @@
+ 
+** IMPORTANT: MAKE SURE THE INFORMATION BELOW IS CORRECT **
+ catalog location: 	catalog
+ tpch files dir: 	../data/
+ heap files dir: 	../dbfile/
+ 
+
+Opening heap dbfile
+int: [31], string: [slate seashell steel medium moccasin], double: [931.03]
+int: [1030], string: [orange floral olive ivory lace], double: [931.03]
+
+
+ query2 returned 2 records 
+
+

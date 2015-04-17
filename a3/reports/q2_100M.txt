@@ -1,0 +1,33 @@
+ 
+** IMPORTANT: MAKE SURE THE INFORMATION BELOW IS CORRECT **
+ catalog location: 	catalog
+ tpch files dir: 	../data/
+ heap files dir: 	../dbfile/
+ 
+
+Opening heap dbfile
+int: [31], string: [slate seashell steel medium moccasin], double: [931.03]
+int: [1030], string: [orange floral olive ivory lace], double: [931.03]
+int: [2029], string: [midnight brown dim violet almond], double: [931.02]
+int: [3028], string: [puff slate tomato moccasin azure], double: [931.02]
+int: [4027], string: [white ivory moccasin coral puff], double: [931.02]
+int: [5026], string: [blanched blush pink light wheat], double: [931.02]
+int: [6025], string: [purple medium light aquamarine dark], double: [931.02]
+int: [7024], string: [forest rosy peach antique midnight], double: [931.02]
+int: [8023], string: [mint salmon moccasin blanched beige], double: [931.02]
+int: [9022], string: [peru misty sandy dark drab], double: [931.02]
+int: [10021], string: [blush steel green sienna snow], double: [931.02]
+int: [11020], string: [plum khaki powder beige peru], double: [931.02]
+int: [12019], string: [navajo tan almond yellow blue], double: [931.01]
+int: [13018], string: [brown royal steel forest chiffon], double: [931.01]
+int: [14017], string: [blue chiffon green powder burnished], double: [931.01]
+int: [15016], string: [ghost aquamarine spring coral lace], double: [931.01]
+int: [16015], string: [forest lavender lime antique medium], double: [931.01]
+int: [17014], string: [rosy yellow spring wheat orange], double: [931.01]
+int: [18013], string: [drab linen blue almond cream], double: [931.01]
+int: [19012], string: [burnished bisque beige green forest], double: [931.01]
+
+
+ query2 returned 20 records 
+
+

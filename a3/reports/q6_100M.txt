@@ -1,0 +1,38 @@
+ 
+** IMPORTANT: MAKE SURE THE INFORMATION BELOW IS CORRECT **
+ catalog location: 	catalog
+ tpch files dir: 	../data/
+ heap files dir: 	../dbfile/
+ 
+
+ query6 
+Opening heap dbfile
+Opening heap dbfile
+double: [1.45421e+06], s_nationkey: [0]
+double: [1.52414e+06], s_nationkey: [1]
+double: [1.68175e+06], s_nationkey: [2]
+double: [1.464e+06], s_nationkey: [3]
+double: [1.5855e+06], s_nationkey: [4]
+double: [1.33967e+06], s_nationkey: [5]
+double: [1.38648e+06], s_nationkey: [6]
+double: [1.99959e+06], s_nationkey: [7]
+double: [1.90511e+06], s_nationkey: [8]
+double: [1.80868e+06], s_nationkey: [9]
+double: [1.63612e+06], s_nationkey: [10]
+double: [1.69923e+06], s_nationkey: [11]
+double: [1.62937e+06], s_nationkey: [12]
+double: [1.12481e+06], s_nationkey: [13]
+double: [1.43898e+06], s_nationkey: [14]
+double: [1.60357e+06], s_nationkey: [15]
+double: [1.35794e+06], s_nationkey: [16]
+double: [1.57486e+06], s_nationkey: [17]
+double: [2.10583e+06], s_nationkey: [18]
+double: [1.32584e+06], s_nationkey: [19]
+double: [1.90624e+06], s_nationkey: [20]
+double: [1.55178e+06], s_nationkey: [21]
+double: [1.87318e+06], s_nationkey: [22]
+double: [1.55033e+06], s_nationkey: [23]
+double: [1.44834e+06], s_nationkey: [24]
+ query6 returned sum for 25 groups
+
+

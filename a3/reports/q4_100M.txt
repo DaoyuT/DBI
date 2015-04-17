@@ -1,0 +1,15 @@
+ 
+** IMPORTANT: MAKE SURE THE INFORMATION BELOW IS CORRECT **
+ catalog location: 	catalog
+ tpch files dir: 	../data/
+ heap files dir: 	../dbfile/
+ 
+
+ query4 
+Opening heap dbfile
+Opening heap dbfile
+Function is: 10 PushDouble
+double: [3.99756e+07]
+ query4 returned 1 recs 
+
+
