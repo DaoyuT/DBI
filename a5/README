@@ -1,0 +1,173 @@
+//TODO - update 
+
+COP6726 : Database System Implementation
+
+Project5 :
+========
+
+
+Team Members:
+============
+
+	1) Tu Dao Yu (UFID: 9147-3473)
+	2) Yogesh Aggarwal (UFID: 1311-1361)
+
+
+BitBucket URL: https://ya87@bitbucket.org/dbi_dt_ya/dbi.git
+=============
+
+
+Code Structure:
+==============
+
+	./src : contatins source files and object files
+	./README : instructions on how to run the project
+	./src/Makefile : makefile to build the project
+
+
+Build and Run:
+=============
+
+	
+	1) test: Builds and runs all test cases provided by the professor/TA
+		a) cd to root directory of project
+		b) cd src
+		c) make test
+		d) ./test [1-11]
+	
+	2) clean: deletes all the old object files
+		a) cd to root directory of project
+		b) cd src
+		c) make clean
+
+
+The Queries:
+===========
+
+	0. 	Tables: 						Attributes:
+		supplier 10000, 				s_suppkey 10000
+		partsupp 800000,				ps_suppkey 10000
+
+		Condition:
+		(s_suppkey = ps_suppkey) AND (s_suppkey>1000)
+		
+	1. 	Tables: 						Attributes:
+		lineitem 6001215, 				l_returnflag 3, l_discount 11, l_shipmode 7
+
+		Condition:
+		(l_returnflag = 'R') AND (l_discount < 0.04 OR l_shipmode = 'MAIL')
+		
+		
+	2. 	Tables: 						Attributes:
+		orders 150000, 					o_custkey 150000
+		customer 150000,				c_custkey 150000, c_nationkey 25
+		nation 25,						n_nationkey 25
+
+		Condition:
+		(c_custkey = o_custkey) AND (c_nationkey = n_nationkey)
+		
+		
+	3. 	Tables: 						Attributes:
+		supplier 10000, 				s_nationey 25
+		customer 150000,				c_custkey 150000, c_nationkey 25
+		nation 25,						n_nationkey 25
+
+		Rename:
+		("nation","n1");
+		("nation","n2");
+		("supplier","s");
+		("customer","c");
+
+		Condition:
+		(s.s_nationkey = n1.n_nationkey) AND (c.c_nationkey = n2.n_nationkey) AND (n1.n_nationkey = n2.n_nationkey )
+		
+		
+	4. 	Tables: 						Attributes:
+		supplier 10000, 				s_suppkey 10000
+		partsupp 800000,				ps_suppkey 10000
+
+		Rename:
+		("nation","n1");
+		("nation","n2");
+		("supplier","s");
+		("customer","c");
+
+		Condition:
+		(s.s_nationkey = n1.n_nationkey) AND (c.c_nationkey = n2.n_nationkey) AND (n1.n_nationkey = n2.n_nationkey )
+		
+	4. 	Tables: 						Attributes:
+		part 200000,					p_partkey 200000, p_size 50
+		partsupp 800000,				ps_suppkey 10000, ps_partkey 200000
+		supplier 10000,					s_suppkey 10000, s_nationkey 25
+		nation 25,						n_nationkey 25, n_regionkey 5
+		region 5,						r_regionkey 5, r_name 5
+
+		Rename:
+		("part","p");
+		("partsupp","ps");
+		("supplier","s");
+		("nation","n");
+		("region","r");
+
+		Condition: 
+		(p.p_partkey=ps.ps_partkey) AND (p.p_size = 2) AND (s.s_suppkey = ps.ps_suppkey) AND (s.s_nationkey = n.n_nationkey) AND (n.n_regionkey = r.r_regionkey) AND (r.r_name = 'AMERICA')	
+
+	5. 	Tables: 						Attributes:
+		customer 150000,				c_custkey 150000, c_mktsegment 5
+		orders 1500000,					o_orderkey 1500000, o_custkey 150000
+		lineitem 6001215,				l_orderkey 1500000
+
+		Condition:
+		(c_mktsegment = 'BUILDING')  AND (c_custkey = o_custkey)  AND (o_orderdate < '1995-03-1') AND (l_orderkey = o_orderkey)
+
+	6. 	Tables: 						Attributes:
+		partsupp 800000,				ps_suppkey 10000
+		supplier 10000,					s_suppkey 10000, s_nationkey 25
+		nation 25,						n_nationkey 25, n_name 25
+
+		Condition:
+		(s_suppkey = ps_suppkey)  AND (s_nationkey = n_nationkey)  AND (n_name = 'AMERICA')
+
+	7. 	Tables: 						Attributes:
+		orders 1500000,					o_orderkey 1500000
+		lineitem 6001215,				l_orderkey 1500000
+
+		Condition:
+		(l_receiptdate >'1995-02-01' ) AND (l_orderkey = o_orderkey)
+
+	8. 	Tables: 						Attributes:
+		part 200000,					p_partkey 200000, p_size 50
+		partsupp 800000,				ps_partkey 200000
+
+		Condition:
+		(p_partkey=ps_partkey) AND (p_size =3 OR p_size=6 OR p_size =19)
+
+	9. 	Tables: 						Attributes:
+		part 200000,					p_partkey 200000, p_name 199996
+		partsupp 800000,				ps_partkey 200000, ps_suppkey 10000
+		supplier 10000, 				s_suppkey 10000
+
+		Condition:
+		(p_partkey=ps_partkey) AND (p_name = 'dark green antique puff wheat')  AND (s_suppkey = ps_suppkey)
+
+	10. Tables: 						Attributes:
+		customer 150000,				c_custkey 150000, c_nationkey 25
+		orders 1500000,					o_orderkey 1500000, o_custkey 150000
+		lineitem 6001215,				l_orderkey 1500000
+		nation 25,						n_nationkey 25
+
+		Condition:
+		(c_custkey = o_custkey)  AND (o_orderdate > '1994-01-23') AND (l_orderkey = o_orderkey)  AND (c_nationkey = n_nationkey)
+	
+	11. Tables: 						Attributes:
+		part 200000,					p_partkey 200000, p_conatiner 40
+		lineitem 6001215,				l_partkey 200000, l_shipinstruct 4,	l_shipmode 7
+
+		Condition:
+		(l_partkey = p_partkey) AND (l_shipmode = 'AIR' OR l_shipmode = 'AIR REG') AND (p_container ='SM BOX' OR p_container = 'SM PACK')  AND (l_shipinstruct = 'DELIVER IN PERSON')
+
+		
+
+
+
+	
