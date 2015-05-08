@@ -7,11 +7,6 @@ WHERE (p.p_partkey = ps.ps_partkey) AND
 
 ANSWER: 2.74243e+08 (5.91 sec)
 
-SELECT SUM (ps.ps_supplycost), s.nationkey
-FROM part AS p, supplier AS s, partsupp AS ps
-WHERE (p.p_partkey = ps.ps_partkey)  AND
-	  (s.s_acctbal > 2500.00) AND
-	  (s.s_suppkey = ps.ps_suppkey)
 ============================================================
 
 (q2)
@@ -31,11 +26,7 @@ WHERE (l.l_returnflag = 'R') AND
 	  (l.l_discount < 0.04 OR l.l_shipmode = 'MAIL') AND
 	  (l.l_orderkey > 5000) AND (l.l_orderkey < 6000)
 
-ANSWER: 109 rows in set (17.47 sec)
-96 rows
-
-(l_returnflag = 'R') AND (l_discount < 0.04 OR l_shipmode = 'MAIL') AND (l_orderkey > 5000) AND (l_orderkey < 6000)
-96 rows in a1 project.
+ANSWER: 96 rows in set (17.47 sec)
 
 ===========================================================
 
@@ -57,16 +48,8 @@ WHERE (c.c_custkey = o.o_custkey) AND
 	  (c.c_name = 'Customer#000070919') AND
 	  (l.l_quantity > 30.00 AND l.l_discount < 0.03)
 
-ANSWER: 0.0075 (55.4 sec)
+ANSWER: 0.03 (55.4 sec)
 
-SELECT SUM (l.l_discount)
-FROM customer AS c, orders AS o, lineitem AS l
-WHERE (c.c_custkey = o.o_custkey) AND
-	  (o.o_orderkey = l.l_orderkey) AND
-	  (c.c_name = 'Customer#000070919') AND
-	  (l.l_quantity > 30.00) AND (l.l_discount < 0.03)
-
-ANSWER: (0.03) and took too long to finish
 ===========================================================
 
 (q6)
@@ -79,27 +62,7 @@ WHERE (s.s_suppkey = ps.ps_suppkey) AND
 
 
 ANSWER: 9964 rows (1.51 sec)
-(didn't print anything)
 
-SELECT DISTINCT s.s_nationkey
-FROM supplier AS s, part AS p, partsupp AS ps
-WHERE (s.s_suppkey = ps.ps_suppkey) AND
-	  (p.p_partkey = ps.ps_partkey) AND
-	  (p.p_mfgr = 'Manufacturer#4') AND
-	  (ps.ps_supplycost < 350.00)
-
-SELECT s.s_name
-FROM supplier AS s, part AS p, partsupp AS ps
-WHERE (s.s_suppkey = ps.ps_suppkey) AND
-	  (p.p_partkey = ps.ps_partkey) AND
-	  (p.p_mfgr = 'Manufacturer#4') AND
-	  (ps.ps_supplycost < 350.00)
-
-SELECT s.s_name
-FROM supplier AS s, partsupp AS ps, part AS p
-WHERE (s.s_suppkey = ps.ps_suppkey) AND
-	  (p.p_partkey = ps.ps_partkey) AND
-	  (ps.ps_supplycost < 350.00)
 ===========================================================
 (q7)
 
@@ -111,30 +74,11 @@ WHERE (c.c_mktsegment = 'BUILDING') AND
 GROUP BY l.l_orderkey, o.o_orderdate, o.o_shippriority
 
 ANSWER: 7 rows (41.2 sec)
-(This is probably an error.  Found 33604240 records on a page.) Took to long to print this error msg
 
-
-SELECT SUM (l.l_extendedprice * (1 - l.l_discount)), l.l_orderkey, o.o_orderdate, o.o_shippriority
-FROM customer AS c, orders AS o, lineitem AS l 
-WHERE (c.c_mktsegment = 'BUILDING') AND 
-      (c.c_custkey = o.o_custkey) AND (l.l_orderkey = o.o_orderkey) AND
-	  (l.l_orderkey < 100 )
-GROUP BY l.l_orderkey, o.o_orderdate, o.o_shippriority
-
-SELECT SUM (l.l_extendedprice * (1 - l.l_discount)), l.l_orderkey, o.o_orderdate, o.o_shippriority
-FROM customer AS c, orders AS o, lineitem AS l 
-WHERE (c.c_mktsegment = 'BUILDING') AND 
-      (c.c_custkey = o.o_custkey) AND (l.l_orderkey = o.o_orderkey) AND
-	  (l.l_orderkey < 100 ) AND (o.o_orderkey < 100)
-GROUP BY l.l_orderkey, o.o_orderdate, o.o_shippriority
-
-
-SELECT SUM (ps.ps_supplycost) 
-FROM supplier AS s, partsupp AS ps
-WHERE (s.s_suppkey = ps.ps_suppkey) 
-GROUP BY s.s_nationkey;
 ===========================================================
-
+PS: These answers are based on 1GB data from tpc-h dbgen.
+Run this on Linux to make it more feasible, cygwin under Windows sometimes gives the wrong answer.
+===========================================================
 
 
 DDL Queries
