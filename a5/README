@@ -1,22 +1,3 @@
-//TODO - update 
-
-COP6726 : Database System Implementation
-
-Project5 :
-========
-
-
-Team Members:
-============
-
-	1) Tu Dao Yu (UFID: 9147-3473)
-	2) Yogesh Aggarwal (UFID: 1311-1361)
-
-
-BitBucket URL: https://ya87@bitbucket.org/dbi_dt_ya/dbi.git
-=============
-
-
 Code Structure:
 ==============
 
@@ -24,150 +5,115 @@ Code Structure:
 	./README : instructions on how to run the project
 	./src/Makefile : makefile to build the project
 
-
 Build and Run:
 =============
 
-	
-	1) test: Builds and runs all test cases provided by the professor/TA
+	1) test: 
 		a) cd to root directory of project
 		b) cd src
 		c) make test
-		d) ./test [1-11]
+		d) ./test
 	
-	2) clean: deletes all the old object files
+	2) clean: 
 		a) cd to root directory of project
 		b) cd src
 		c) make clean
 
+Test Querys and DDL commands:
+============================
 
-The Queries:
+(q1)
+SELECT SUM (ps.ps_supplycost)
+FROM part AS p, supplier AS s, partsupp AS ps
+WHERE (p.p_partkey = ps.ps_partkey) AND
+	  (s.s_suppkey = ps.ps_suppkey) AND
+	  (s.s_acctbal > 2500.00)
+
+ANSWER: 2.74243e+08 (5.91 sec)
+
+============================================================
+
+(q2)
+SELECT SUM (c.c_acctbal)
+FROM customer AS c, orders AS o
+WHERE (c.c_custkey = o.o_custkey) AND
+	  (o.o_totalprice < 10000.00)
+
+ANSWER: 1.33123e+08 (17.31 sec) 
+
+============================================================
+
+(q3)
+SELECT l.l_orderkey, l.l_partkey, l.l_suppkey
+FROM lineitem AS l
+WHERE (l.l_returnflag = 'R') AND 
+	  (l.l_discount < 0.04 OR l.l_shipmode = 'MAIL') AND
+	  (l.l_orderkey > 5000) AND (l.l_orderkey < 6000)
+
+ANSWER: 96 rows in set (17.47 sec)
+
+===========================================================
+
+(q4)
+SELECT ps.ps_partkey, ps.ps_suppkey, ps.ps_availqty 
+FROM partsupp AS ps 
+WHERE (ps.ps_partkey < 100) AND (ps.ps_suppkey < 50)
+
+ANSWER: 48 rows (1.95 sec)
+
+==========================================================
+
+(q5)
+
+SELECT SUM (l.l_discount)
+FROM customer AS c, orders AS o, lineitem AS l
+WHERE (c.c_custkey = o.o_custkey) AND
+	  (o.o_orderkey = l.l_orderkey) AND
+	  (c.c_name = 'Customer#000070919') AND
+	  (l.l_quantity > 30.00 AND l.l_discount < 0.03)
+
+ANSWER: 0.03 (55.4 sec)
+
+===========================================================
+
+(q6)
+SELECT DISTINCT s.s_name
+FROM supplier AS s, part AS p, partsupp AS ps
+WHERE (s.s_suppkey = ps.ps_suppkey) AND
+	  (p.p_partkey = ps.ps_partkey) AND
+	  (p.p_mfgr = 'Manufacturer#4') AND
+	  (ps.ps_supplycost < 350.00)
+
+
+ANSWER: 9964 rows (1.51 sec)
+
+===========================================================
+(q7)
+
+SELECT SUM (l.l_extendedprice * (1 - l.l_discount)), l.l_orderkey, o.o_orderdate, o.o_shippriority
+FROM customer AS c, orders AS o, lineitem AS l 
+WHERE (c.c_mktsegment = 'BUILDING') AND 
+      (c.c_custkey = o.o_custkey) AND (l.l_orderkey = o.o_orderkey) AND
+	  (l.l_orderkey < 100 OR o.o_orderkey < 100)
+GROUP BY l.l_orderkey, o.o_orderdate, o.o_shippriority
+
+ANSWER: 7 rows (41.2 sec)
+
+===========================================================
+PS: These answers are based on 1GB data from tpc-h dbgen.
+Run this on Linux to make it more feasible, cygwin under Windows sometimes gives the wrong answer.
+===========================================================
+
+
+DDL Queries
 ===========
+CREATE TABLE mytable (att1 INTEGER, att2 DOUBLE, att3 STRING) AS HEAP;
 
-	0. 	Tables: 						Attributes:
-		supplier 10000, 				s_suppkey 10000
-		partsupp 800000,				ps_suppkey 10000
+INSERT 'myfile.txt' INTO mytable;
+//move mytable.bin and mytable.bin.meta to dbfile directory after loading the myfile into mytable
 
-		Condition:
-		(s_suppkey = ps_suppkey) AND (s_suppkey>1000)
-		
-	1. 	Tables: 						Attributes:
-		lineitem 6001215, 				l_returnflag 3, l_discount 11, l_shipmode 7
+DROP TABLE mytable;
 
-		Condition:
-		(l_returnflag = 'R') AND (l_discount < 0.04 OR l_shipmode = 'MAIL')
-		
-		
-	2. 	Tables: 						Attributes:
-		orders 150000, 					o_custkey 150000
-		customer 150000,				c_custkey 150000, c_nationkey 25
-		nation 25,						n_nationkey 25
-
-		Condition:
-		(c_custkey = o_custkey) AND (c_nationkey = n_nationkey)
-		
-		
-	3. 	Tables: 						Attributes:
-		supplier 10000, 				s_nationey 25
-		customer 150000,				c_custkey 150000, c_nationkey 25
-		nation 25,						n_nationkey 25
-
-		Rename:
-		("nation","n1");
-		("nation","n2");
-		("supplier","s");
-		("customer","c");
-
-		Condition:
-		(s.s_nationkey = n1.n_nationkey) AND (c.c_nationkey = n2.n_nationkey) AND (n1.n_nationkey = n2.n_nationkey )
-		
-		
-	4. 	Tables: 						Attributes:
-		supplier 10000, 				s_suppkey 10000
-		partsupp 800000,				ps_suppkey 10000
-
-		Rename:
-		("nation","n1");
-		("nation","n2");
-		("supplier","s");
-		("customer","c");
-
-		Condition:
-		(s.s_nationkey = n1.n_nationkey) AND (c.c_nationkey = n2.n_nationkey) AND (n1.n_nationkey = n2.n_nationkey )
-		
-	4. 	Tables: 						Attributes:
-		part 200000,					p_partkey 200000, p_size 50
-		partsupp 800000,				ps_suppkey 10000, ps_partkey 200000
-		supplier 10000,					s_suppkey 10000, s_nationkey 25
-		nation 25,						n_nationkey 25, n_regionkey 5
-		region 5,						r_regionkey 5, r_name 5
-
-		Rename:
-		("part","p");
-		("partsupp","ps");
-		("supplier","s");
-		("nation","n");
-		("region","r");
-
-		Condition: 
-		(p.p_partkey=ps.ps_partkey) AND (p.p_size = 2) AND (s.s_suppkey = ps.ps_suppkey) AND (s.s_nationkey = n.n_nationkey) AND (n.n_regionkey = r.r_regionkey) AND (r.r_name = 'AMERICA')	
-
-	5. 	Tables: 						Attributes:
-		customer 150000,				c_custkey 150000, c_mktsegment 5
-		orders 1500000,					o_orderkey 1500000, o_custkey 150000
-		lineitem 6001215,				l_orderkey 1500000
-
-		Condition:
-		(c_mktsegment = 'BUILDING')  AND (c_custkey = o_custkey)  AND (o_orderdate < '1995-03-1') AND (l_orderkey = o_orderkey)
-
-	6. 	Tables: 						Attributes:
-		partsupp 800000,				ps_suppkey 10000
-		supplier 10000,					s_suppkey 10000, s_nationkey 25
-		nation 25,						n_nationkey 25, n_name 25
-
-		Condition:
-		(s_suppkey = ps_suppkey)  AND (s_nationkey = n_nationkey)  AND (n_name = 'AMERICA')
-
-	7. 	Tables: 						Attributes:
-		orders 1500000,					o_orderkey 1500000
-		lineitem 6001215,				l_orderkey 1500000
-
-		Condition:
-		(l_receiptdate >'1995-02-01' ) AND (l_orderkey = o_orderkey)
-
-	8. 	Tables: 						Attributes:
-		part 200000,					p_partkey 200000, p_size 50
-		partsupp 800000,				ps_partkey 200000
-
-		Condition:
-		(p_partkey=ps_partkey) AND (p_size =3 OR p_size=6 OR p_size =19)
-
-	9. 	Tables: 						Attributes:
-		part 200000,					p_partkey 200000, p_name 199996
-		partsupp 800000,				ps_partkey 200000, ps_suppkey 10000
-		supplier 10000, 				s_suppkey 10000
-
-		Condition:
-		(p_partkey=ps_partkey) AND (p_name = 'dark green antique puff wheat')  AND (s_suppkey = ps_suppkey)
-
-	10. Tables: 						Attributes:
-		customer 150000,				c_custkey 150000, c_nationkey 25
-		orders 1500000,					o_orderkey 1500000, o_custkey 150000
-		lineitem 6001215,				l_orderkey 1500000
-		nation 25,						n_nationkey 25
-
-		Condition:
-		(c_custkey = o_custkey)  AND (o_orderdate > '1994-01-23') AND (l_orderkey = o_orderkey)  AND (c_nationkey = n_nationkey)
-	
-	11. Tables: 						Attributes:
-		part 200000,					p_partkey 200000, p_conatiner 40
-		lineitem 6001215,				l_partkey 200000, l_shipinstruct 4,	l_shipmode 7
-
-		Condition:
-		(l_partkey = p_partkey) AND (l_shipmode = 'AIR' OR l_shipmode = 'AIR REG') AND (p_container ='SM BOX' OR p_container = 'SM PACK')  AND (l_shipinstruct = 'DELIVER IN PERSON')
-
-		
-
-
-
-	
+SELECT m.att1, m.att2, m.att3
+FROM mytable AS m
+WHERE (m.att1 > 1);
